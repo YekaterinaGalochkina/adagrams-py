@@ -70,4 +70,21 @@ def score_word(word):
 
 
 def get_highest_word_score(word_list):
-    pass
+
+    word_data = {}
+    for word in word_list:
+        word_data[word] = [score_word(word), len(word)]
+        
+    max_score = 0
+    winning_word = None
+    for word, values in word_data.items():
+        score, length = values
+        if score > max_score:
+            max_score = score
+            winning_word = word
+        elif score == max_score:
+            if len(winning_word) != 10 and length == 10:
+                winning_word = word
+            elif length < len(winning_word) and len(winning_word) != 10:
+                winning_word = word
+    return((winning_word, max_score))
